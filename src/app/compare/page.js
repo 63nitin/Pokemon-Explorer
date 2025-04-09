@@ -6,7 +6,6 @@ import LoadingPokeball from '@/components/LoadingPokeball'
 
 // Add dynamic export configuration
 export const dynamic = 'force-dynamic'
-export const revalidate = 0
 
 const typeColors = {
   normal: "bg-gray-400",

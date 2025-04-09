@@ -1,11 +1,12 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, use } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { fetchPokemonDetails } from '@/Services/pokeapi'
 import LoadingPokeball from '@/components/LoadingPokeball'
 
 export default function PokemonDetail({ params }) {
+  const pokemonName = use(params).name
   const [pokemon, setPokemon] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [isShiny, setIsShiny] = useState(false)
@@ -13,7 +14,7 @@ export default function PokemonDetail({ params }) {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const data = await fetchPokemonDetails(params.name)
+        const data = await fetchPokemonDetails(pokemonName)
         setPokemon(data)
       } catch (error) {
         console.error("Failed to load Pokemon:", error)
@@ -23,7 +24,7 @@ export default function PokemonDetail({ params }) {
     }
     
     loadData()
-  }, [params.name])
+  }, [pokemonName])
 
   if (isLoading) {
     return (
