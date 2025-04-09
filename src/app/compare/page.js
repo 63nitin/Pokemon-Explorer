@@ -4,6 +4,10 @@ import { fetchPokemonDetails } from '@/Services/pokeapi'
 import { useEffect, useState, Suspense } from 'react'
 import LoadingPokeball from '@/components/LoadingPokeball'
 
+// Add dynamic export configuration
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 const typeColors = {
   normal: "bg-gray-400",
   fire: "bg-red-500",
