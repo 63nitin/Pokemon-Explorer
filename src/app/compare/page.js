@@ -1,7 +1,8 @@
 'use client'
 import { useSearchParams } from 'next/navigation'
 import { fetchPokemonDetails } from '@/Services/pokeapi'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
+import LoadingPokeball from '@/components/LoadingPokeball'
 
 const typeColors = {
   normal: "bg-gray-400",
@@ -24,20 +25,36 @@ const typeColors = {
   fairy: "bg-pink-300",
 };
 
-export default function ComparePage() {
+function CompareContent() {
   const searchParams = useSearchParams()
   const [pokemons, setPokemons] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const ids = searchParams.get('ids').split(',')
+    const ids = searchParams.get('ids')?.split(',') || []
     const fetchData = async () => {
-      const data = await Promise.all(
-        ids.map(id => fetchPokemonDetails(id))
-      )
-      setPokemons(data)
+      try {
+        setIsLoading(true)
+        const data = await Promise.all(
+          ids.map(id => fetchPokemonDetails(id))
+        )
+        setPokemons(data)
+      } catch (error) {
+        console.error('Error fetching pokemon data:', error)
+      } finally {
+        setIsLoading(false)
+      }
     }
     fetchData()
   }, [searchParams])
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-100 p-4 flex items-center justify-center">
+        <LoadingPokeball />
+      </div>
+    )
+  }
 
   if (pokemons.length < 2) {
     return (
@@ -80,5 +97,17 @@ export default function ComparePage() {
         ))}
       </div>
     </div>
+  )
+}
+
+export default function ComparePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-100 p-4 flex items-center justify-center">
+        <LoadingPokeball />
+      </div>
+    }>
+      <CompareContent />
+    </Suspense>
   )
 }
