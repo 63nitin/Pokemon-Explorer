@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎮 Pokemon Explorer - Next.js App
 
-## Getting Started
+A responsive Pokemon Explorer web app built with Next.js, featuring:
+- **Search & filter** Pokemon by name/type
+- **Detailed view** with stats, abilities, and evolutions
+- **Favorites system** (localStorage)
+- **Comparison tool** (compare up to 3 Pokemon)
+- **Shiny Pokemon toggle**
+- **Server-side rendering (SSR)** for better SEO
 
-First, run the development server:
+![Demo](public/images/demo.gif)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+✔️ **Homepage**  
+- Browse Pokemon with pagination  
+- Real-time search by name  
+- Filter by Pokemon type  
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+✔️ **Detail Page**  
+- High-quality Pokemon artwork  
+- Stats visualization  
+- Abilities & moves list  
+- Evolution chain  
+- Shiny mode toggle  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+✔️ **Favorites System**  
+- Save favorite Pokemon  
+- Persists across sessions  
 
-## Learn More
+✔️ **Comparison Tool**  
+- Compare stats of 2-3 Pokemon  
+- Side-by-side visualization  
 
-To learn more about Next.js, take a look at the following resources:
+✔️ **Optimized Performance**  
+- SSR/SSG support  
+- Responsive design  
+- Image optimization  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ How to Run Locally
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/63nitin/Pokemon-Explorer
+   cd Pokemon-Explorer
 
-## Deploy on Vercel
+2. **Install Dependecy**
+    npm install
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Run on Local Server**
+    npm run dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Open in browser**
+    http://localhost:3000
