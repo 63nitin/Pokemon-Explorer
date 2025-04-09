@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ScaleIcon, HeartOutlineIcon, HeartFilledIcon } from './Icons';
 
 const typeColors = {
@@ -66,10 +67,12 @@ export default function PokemonCard({
         <a className="block bg-gradient-to-br from-blue-100 to-purple-400 rounded-lg shadow-md p-4 text-center cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-[1.03] h-full overflow-hidden search-glow">
           <div className="w-24 h-24 mx-auto mb-2 flex items-center justify-center">
             {pokemon.image ? (
-              <img
+              <Image
                 src={pokemon.image}
                 alt={pokemon.name}
-                className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                width={96}
+                height={96}
+                className="object-contain transition-transform duration-300 group-hover:scale-110"
                 loading="lazy"
               />
             ) : (

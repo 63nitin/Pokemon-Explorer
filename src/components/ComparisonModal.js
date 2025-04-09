@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link';
+import Image from 'next/image';
 import { useContext } from 'react';
 import { ComparisonContext } from '../app/context/ComparisonContext';
 
@@ -14,7 +15,13 @@ export default function ComparisonModal() {
       <div className={`grid grid-cols-${comparisonList.length} gap-2 mb-4`}>
         {comparisonList.map(pokemon => (
           <div key={pokemon.id} className="relative text-center">
-            <img src={pokemon.image} alt={pokemon.name} className="w-16 h-16 sm:w-20 sm:h-20 object-contain mx-auto" />
+            <Image 
+              src={pokemon.image} 
+              alt={pokemon.name} 
+              width={80}
+              height={80}
+              className="object-contain mx-auto"
+            />
             <button 
               onClick={() => removeFromComparison(pokemon.id)} 
               className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold leading-none"

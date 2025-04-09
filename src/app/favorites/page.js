@@ -1,6 +1,7 @@
 'use client'
 import { useFavorites } from '../context/FavoritesContext'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function FavoritesPage() {
   const { favorites } = useFavorites()
@@ -11,7 +12,7 @@ export default function FavoritesPage() {
       
       {favorites.length === 0 ? (
         <div className="text-center py-10">
-          <p className="text-xl mb-4">You haven't favorited any Pokémons yet!</p>
+          <p className="text-xl mb-4">You haven&apos;t favorited any Pokémons yet!</p>
           <Link href="/" className="text-blue-500 hover:underline">
             Browse Pokémons
           </Link>
@@ -21,10 +22,12 @@ export default function FavoritesPage() {
           {favorites.map(id => (
             <Link key={id} href={`/pokemon/${id}`}>
               <div className="bg-white rounded-lg shadow-md p-4 text-center">
-                <img
+                <Image
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
                   alt={`Pokemon ${id}`}
-                  className="w-24 h-24 mx-auto"
+                  width={96}
+                  height={96}
+                  className="mx-auto"
                 />
                 <p className="mt-2">#{id}</p>
               </div>

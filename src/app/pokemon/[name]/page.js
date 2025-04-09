@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { fetchPokemonDetails } from '@/Services/pokeapi'
 import LoadingPokeball from '@/components/LoadingPokeball'
 
@@ -72,7 +73,7 @@ export default function PokemonDetail({ params }) {
           {/* Left Column - Image and Types */}
           <div className="w-full md:w-1/3 ">
             <div className=" search-glow bg-gradient-to-br from-blue-300 to-purple-400 rounded-xl p-6 flex justify-center mb-6 shadow-inner">
-              <img 
+              <Image 
                 src={
                   isShiny 
                     ? pokemon.sprites.front_shiny 
@@ -80,7 +81,9 @@ export default function PokemonDetail({ params }) {
                       pokemon.sprites.front_default
                 } 
                 alt={pokemon.name}
-                className="w-72 h-72 object-contain "
+                width={288}
+                height={288}
+                className="object-contain"
               />
             </div>
             
