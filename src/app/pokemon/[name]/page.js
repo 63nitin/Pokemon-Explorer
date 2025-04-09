@@ -2,20 +2,40 @@
 import { useEffect, useState, use } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { fetchPokemonDetails } from '@/Services/pokeapi'
+import { fetchPokemonDetails, fetchPokemonSpecies, fetchEvolutionChain } from '@/Services/pokeapi'
 import LoadingPokeball from '@/components/LoadingPokeball'
+import EvolutionChain from '@/components/EvolutionChain'
 
 export default function PokemonDetail({ params }) {
   const pokemonName = use(params).name
   const [pokemon, setPokemon] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [isShiny, setIsShiny] = useState(false)
+  const [evolutionChain, setEvolutionChain] = useState([])
 
   useEffect(() => {
     const loadData = async () => {
       try {
+        setIsLoading(true)
         const data = await fetchPokemonDetails(pokemonName)
         setPokemon(data)
+
+        // Fetch species data to get evolution chain URL
+        const speciesData = await fetchPokemonSpecies(pokemonName)
+        if (speciesData.evolution_chain?.url) {
+          const evolutionData = await fetchEvolutionChain(speciesData.evolution_chain.url)
+          // Extract evolution chain from the nested structure
+          const chain = []
+          let current = evolutionData.chain
+          while (current) {
+            chain.push({
+              name: current.species.name,
+              url: current.species.url
+            })
+            current = current.evolves_to[0]
+          }
+          setEvolutionChain(chain)
+        }
       } catch (error) {
         console.error("Failed to load Pokemon:", error)
       } finally {
@@ -164,6 +184,9 @@ export default function PokemonDetail({ params }) {
             </div>
           </div>
         </div>
+
+        {/* Add Evolution Chain */}
+        <EvolutionChain evolutionChain={evolutionChain} />
       </div>
     </div>
   )

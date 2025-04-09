@@ -12,3 +12,13 @@ export const fetchPokemonDetails = async (name) => {
   const response = await axios.get(`${POKEAPI_BASE_URL}/pokemon/${name}`);
   return response.data;
 };
+
+export const fetchPokemonSpecies = async (name) => {
+  const response = await axios.get(`${POKEAPI_BASE_URL}/pokemon-species/${name}`);
+  return response.data;
+};
+
+export const fetchEvolutionChain = async (url) => {
+  const response = await axios.get(url);
+  return response.data;
+};
